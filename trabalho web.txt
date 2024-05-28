@@ -1,0 +1,123 @@
+1- Função javascript que recebe uma palavra de entrada e retorna se é um palindromo ou não
+
+function ehPalindromo(palavra) {
+    // Remove espaços em branco e converte a palavra para minúsculas
+    const palavraFormatada = palavra.replace(/\s+/g, '').toLowerCase();
+    
+    // Inverte a palavra formatada
+    const palavraInvertida = palavraFormatada.split('').reverse().join('');
+    
+    // Verifica se a palavra formatada é igual à palavra invertida
+    return palavraFormatada === palavraInvertida;
+}
+
+// Exemplos de uso
+console.log(ehPalindromo("radar"));
+console.log(ehPalindromo("hello"));
+
+5-um labirinto que dá uma mensagem mandando voltar ao inicio quando toca na parede
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labirinto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Labirinto</h1>
+    <div id="labirinto">
+        <div class="parede" id="parede1"></div>
+        <div class="parede" id="parede2"></div>
+        <div class="parede" id="parede3"></div>
+        <div class="parede" id="parede4"></div>
+        <div id="inicio" class="movel">Início</div>
+        <div id="fim">Fim</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+7- função que recebe uma matriz e um número e substitui uma linha equivalente aos números por zero
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Substituir Linha por Zeros</title>
+</head>
+<body>
+    <h1>Substituir Linha por Zeros</h1>
+
+    <div>
+        <label for="matriz">Matriz:</label>
+        <textarea id="matriz" rows="4" cols="30"></textarea>
+    </div>
+
+    <div>
+        <label for="numero">Número da Linha:</label>
+        <input type="number" id="numero">
+    </div>
+
+    <button onclick="substituirLinhaPorZeros()">Substituir</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function substituirLinhaPorZeros() {
+            const matrizInput = document.getElementById('matriz').value.trim();
+            const numero = parseInt(document.getElementById('numero').value);
+            const resultadoDiv = document.getElementById('resultado');
+
+            // Verifica se a entrada é válida
+            if (matrizInput === '' || isNaN(numero)) {
+                resultadoDiv.textContent = 'Por favor, insira uma matriz e um número válido.';
+                return;
+            }
+
+            // Converte a entrada de texto em uma matriz
+            const linhas = matrizInput.split('\n').map(row => row.trim().split(/\s+/).map(Number));
+
+            // Verifica se o número da linha é válido
+            if (numero < 0 || numero >= linhas.length) {
+                resultadoDiv.textContent = 'O número da linha está fora do intervalo.';
+                return;
+            }
+
+            // Substitui a linha equivalente ao número por zeros
+            linhas[numero] = Array(linhas[numero].length).fill(0);
+
+            // Mostra a matriz atualizada
+            resultadoDiv.textContent = 'Matriz com linha substituída por zeros:\n' + linhas.map(row => row.join(' ')).join('\n');
+        }
+    </script>
+</body>
+</html>
+
+15- função javascript que recebe três letras e retorna todas as combinações únicas dessas letras
+
+ function combinacoesUnicas(letras) {
+    const resultado = [];
+
+    // Função auxiliar recursiva para gerar as combinações
+    function gerarCombinacoes(prefixo, letrasRestantes) {
+        if (prefixo.length === 3) {
+            resultado.push(prefixo);
+            return;
+        }
+
+        for (let i = 0; i < letrasRestantes.length; i++) {
+            gerarCombinacoes(prefixo + letrasRestantes[i], letrasRestantes.slice(0, i) + letrasRestantes.slice(i + 1));
+        }
+    }
+
+    gerarCombinacoes('', letras);
+    return resultado;
+}
+
+// Exemplo de uso
+const letras = 'abc';
+const resultado = combinacoesUnicas(letras);
+console.log(resultado);
